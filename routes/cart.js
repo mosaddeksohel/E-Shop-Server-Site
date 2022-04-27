@@ -3,17 +3,18 @@ const Product = require("../models/Product");
 const {
   verifyTokenAndAdmin,
   verifyTokenAndAuthorization,
+  verifyToken,
 } = require("./verifyToken");
 
 const router = require("express").Router();
 
 // CREATE
-router.post("/", verifyTokenAndAdmin, async (req, res) => {
-  const newProduct = new Product(req.body);
+router.post("/", verifyToken, async (req, res) => {
+  const newCart = new Product(req.body);
 
   try {
-    const saveProduct = await newProduct.save();
-    res.status(200).json(saveProduct);
+    const saveCart = await newCart.save();
+    res.status(200).json(saveCart);
   } catch (err) {
     res.status(500).json(err);
   }
