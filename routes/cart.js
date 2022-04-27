@@ -1,5 +1,4 @@
 const Cart = require("../models/Cart");
-const Product = require("../models/Product");
 
 const {
   verifyTokenAndAdmin,
@@ -11,7 +10,7 @@ const router = require("express").Router();
 
 // CREATE CART
 router.post("/", verifyToken, async (req, res) => {
-  const newCart = new Product(req.body);
+  const newCart = new Cart(req.body);
 
   try {
     const saveCart = await newCart.save();
@@ -24,7 +23,7 @@ router.post("/", verifyToken, async (req, res) => {
 // UPDATE CART
 router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
   try {
-    const updatedCart = await Product.findByIdAndUpdate(
+    const updatedCart = await Cart.findByIdAndUpdate(
       req.params.id,
       {
         $set: req.body,
